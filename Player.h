@@ -3,7 +3,7 @@
 
 #include "world.h"
 #include "Variables.h"
-#include "Inventory.h"
+#include "Menu.h"
 #include "Puzzle.h"
 
 bool checkcolision(void);
@@ -464,14 +464,15 @@ bool checkcolision(void) // Transformed it into a function
    else if((tft.solid[i].spritecol == stonecaveo1) && room == 2){room = 1; player_x = 144; player_y = 160; cameraX = -416; cameraY = -368; cameraXMin = -960; cameraYMin = -1024;}
    else if((tft.solid[i].spritecol == ladderu1) && room == 2){room = 3; player_x = 144; player_y = 170; cameraX = -128; cameraY = -254; cameraXMin = -336; cameraYMin = -448;}    
    else if((tft.solid[i].spritecol == ladderd1) && room == 3){room = 2; player_x = 80; player_y = 112; cameraX = -0; cameraY = -0; cameraXMin = -0; cameraYMin = -704;}
-   else if((tft.solid[i].spritecol == fremenblackr1) && room == 3){tft.Popup(F(" ""There are many shops in Arrakeen."" "),1,55,25); return true;}
-   else if((tft.solid[i].spritecol == fremenblondel1) && room == 3){tft.Popup(F(" ""Many of the workers commute from"" "),1,55,20); tft.Popup3(F(" ""the villages to the south."" "),1,75,30); return true;}
-   else if((tft.solid[i].spritecol == fremenblackl2) && room == 3){tft.Popup(F(" ""Welcome to Arrakeen!"" "),1,90,25); return true;}
-   else if((tft.solid[i].spritecol == fremenfblackf1) && room == 3){tft.Popup(F(" ""Do you like comics? Be sure to check"" "),1,45,20); tft.Popup3(F(" ""out Arrakeens Comic shop!"" "),1,75,30);return true;}
-   else if((tft.solid[i].spritecol == fremenfelderredf1) && room == 3){tft.Popup(F(" ""My daughter works in the palace."" "),1,60,25); return true;}
-   else if((tft.solid[i].spritecol == fremenfbrownl1) && room == 3){tft.Popup(F(" ""Many things can be made from spice"" "),1,50,20); tft.Popup3(F(" ""solids."" "),1,125,30);return true;}
    
-   else if((tft.solid[i].spritecol == chest1) && room == 3 && (ButtonB.fallingEdge()) && item_1 == 1){tft.Popup(F(" ""You got key"" "),1,90,25); AddInv(water); getFirstAvailSlot(); return true;}
+   else if((tft.solid[i].spritecol == fremenblackr1) && room == 3){tft.Popup(F(" ""There are many shops in Arrakeen."" "),1,60,25); return true;}
+   else if((tft.solid[i].spritecol == fremenblondel1) && room == 3){tft.Popup(F(" ""Many of the workers commute from"" "),1,60,20); tft.Popup3(F(" ""the villages to the south."" "),1,75,30); return true;}
+   else if((tft.solid[i].spritecol == fremenblackl2) && room == 3){tft.Popup(F(" ""Welcome to Arrakeen!"" "),1,90,25); return true;}
+   else if((tft.solid[i].spritecol == fremenfblackf1) && room == 3){tft.Popup(F(" ""Do you like comics? Be sure to check"" "),1,50,20); tft.Popup3(F(" ""out Arrakeens Comic shop!"" "),1,75,30);return true;}
+   else if((tft.solid[i].spritecol == fremenfelderredf1) && room == 3){tft.Popup(F(" ""My daughter works in the palace."" "),1,65,25); return true;}
+   else if((tft.solid[i].spritecol == fremenfbrownl1) && room == 3){tft.Popup(F(" ""Many things can be made from spice"" "),1,55,20); tft.Popup3(F(" ""solids."" "),1,130,30);return true;}
+   
+//   else if((tft.solid[i].spritecol == chest1) && room == 3 && (ButtonB.fallingEdge()) && item_1 == 1){tft.Popup(F(" ""You got key"" "),1,90,25); AddInv(water); getFirstAvailSlot(); return true;}
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -481,13 +482,15 @@ bool checkcolision(void) // Transformed it into a function
    else if((tft.solid[i].spritecol == exit1) && room == 4){room = 3; player_x = 128; player_y = 178; cameraX = -0; cameraY = -368; cameraXMin = -336; cameraYMin = -448;}
    else if((tft.solid[i].spritecol == stairsl1) && room == 4){room = 5; player_x = 256; player_y = 96; cameraX = -800; cameraY = -0; cameraXMin = -80; cameraYMin = -144;}    
    else if((tft.solid[i].spritecol == stepsl1) && room == 5){room = 4; player_x = 256; player_y = 112; cameraX = -80; cameraY = -0; cameraXMin = -80; cameraYMin = -144;}
-   else if((tft.solid[i].spritecol == fremenfblonder1) && room == 4){tft.Popup(F(" "" Hmmmm, Pepsi? or Coke? "" "),1,100,25); return true;}
-   else if((tft.solid[i].spritecol == fremenelderblackl1) && room == 4){tft.Popup(F(" "" Yes, how much to print a thumper? "" "),1,45,25); return true;}
-   else if((tft.solid[i].spritecol == fremenredl1) && room == 4){tft.Popup(F(" "" No! No! No! Thats way too much! "" "),1,55,25); return true;}
-   else if((tft.solid[i].spritecol == fremenblackl2) && room == 4){tft.Popup(F(" "" Wait your turn! "" "),1,100,25); return true;}
-   else if((tft.solid[i].spritecol == fremenfelderblondere1) && room == 5){tft.Popup(F(" "" I can't decide! "" "),1,100,25); return true;}
-   else if((tft.solid[i].spritecol == fremenfbrownre1) && room == 5){tft.Popup(F(" "" They never have what I'm looking for! "" "),1,40,25); return true;}
-   else if((tft.solid[i].spritecol == register1) && room == 5){tft.Popup(F(" ""Welcome to the Choam one stop shop!"" "),1,50,20); tft.Popup3(F(" ""How may I help you?"" "),1,90,35);return true;}
+   
+   else if((tft.solid[i].spritecol == fremenfblonder1) && room == 4){tft.Popup(F(" "" Hmmmm, Pepsi? or Coke? "" "),1,105,25); return true;}
+   else if((tft.solid[i].spritecol == fremenelderblackl1) && room == 4){tft.Popup(F(" "" Yes, how much to print a thumper? "" "),1,50,25); return true;}
+   else if((tft.solid[i].spritecol == fremenredl1) && room == 4){tft.Popup(F(" "" No! No! No! Thats way too much! "" "),1,60,25); return true;}
+   else if((tft.solid[i].spritecol == fremenblackl2) && room == 4){tft.Popup(F(" "" Wait your turn! "" "),1,105,25); return true;}
+  
+   else if((tft.solid[i].spritecol == fremenfelderblondere1) && room == 5){tft.Popup(F(" "" I can't decide! "" "),1,105,25); return true;}
+   else if((tft.solid[i].spritecol == fremenfbrownre1) && room == 5){tft.Popup(F(" "" They never have what I'm looking for! "" "),1,45,25); return true;}
+   else if((tft.solid[i].spritecol == register1) && room == 5){tft.Popup(F(" ""Welcome to the Choam one stop shop!"" "),1,55,20); tft.Popup3(F(" ""How may I help you?"" "),1,90,35);return true;}
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////// arrakeen room 2 hotel levels 1 and 2 and 3
@@ -497,8 +500,9 @@ bool checkcolision(void) // Transformed it into a function
    else if((tft.solid[i].spritecol == stepsl1) && room == 7){room = 6; player_x = 52; player_y = 100; cameraX = -0; cameraY = -0; cameraXMin = -80; cameraYMin = -304;}
    else if((tft.solid[i].spritecol == stairsr1) && room == 7){room = 8; player_x = 52; player_y = 96; cameraX = -0; cameraY = -0; cameraXMin = -80; cameraYMin = -304;}    
    else if((tft.solid[i].spritecol == stepsl1) && room == 8){room = 7; player_x = 52; player_y = 186; cameraX = -0; cameraY = -304; cameraXMin = -80; cameraYMin = -304;}
-   else if((tft.solid[i].spritecol == register1) && room == 6){tft.Popup(F(" ""Welcome to the Spice Smugglers Inn!"" "),1,50,20); tft.Popup3(F(" ""How may I help you?"" "),1,90,35);return true;}
-   else if((tft.solid[i].spritecol == fremenelderblackl1) && room == 6){tft.Popup(F(" ""I'm here on official business!"" "),1,60,25);return true;}
+   
+   else if((tft.solid[i].spritecol == register1) && room == 6){tft.Popup(F(" ""Welcome to the Spice Smugglers Inn!"" "),1,55,20); tft.Popup3(F(" ""How may I help you?"" "),1,90,35);return true;}
+   else if((tft.solid[i].spritecol == fremenelderblackl1) && room == 6){tft.Popup(F(" ""I'm here on official business!"" "),1,65,25);return true;}
    else if((tft.solid[i].spritecol == fremenfblackf1) && room == 6){tft.Popup(F(" ""This is my room! Please leave!"" "),1,65,25); return true;}
    else if((tft.solid[i].spritecol == fremenfredre1) && room == 6){tft.Popup(F(" ""Were you raised in seitch? Get"" "),1,60,20); tft.Popup3(F(" ""out of here!!"" "),1,110,35);return true;}
    else if((tft.solid[i].spritecol == fremenblackre1) && room == 6){tft.Popup(F(" ""Fremen Trash!"" "),1,110,25);return true;}
@@ -521,7 +525,15 @@ bool checkcolision(void) // Transformed it into a function
  ////////////////// arrakeen room 3 factory ?  
    else if((tft.solid[i].spritecol == door3) && room == 3){room = 9; player_x = 128; player_y = 204; cameraX = -128; cameraY = -224; cameraXMin = -160; cameraYMin = -224;}    
    else if((tft.solid[i].spritecol == exit1) && room == 9){room = 3; player_x = 144; player_y = 160; cameraX = -336; cameraY = -384; cameraXMin = -336; cameraYMin = -448;}
- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   else if((tft.solid[i].spritecol == register1) && room == 9){tft.Popup(F(" ""Welcome to Spice-x Recyclers!"" "),1,60,20); tft.Popup3(F(" ""How may I help you?"" "),1,90,35);return true;}
+   else if((tft.solid[i].spritecol == fremenfblondel1) && room == 9){tft.Popup(F(" ""You can recycle almost anything here"" "),1,45,20); tft.Popup3(F(" ""for 3D printing. Just pick a machine."" "),1,45,35);return true;}
+   else if((tft.solid[i].spritecol == fremenfredr1) && room == 9){tft.Popup(F(" ""I'm done with this machine. Feel"" "),1,60,20); tft.Popup3(F(" ""free to use it."" "),1,100,35);return true;}
+   else if((tft.solid[i].spritecol == fremenblackre1) && room == 9){tft.Popup(F(" ""So much to do. So little time."" "),1,60,25); return true;}
+   else if((tft.solid[i].spritecol == fremenredre1) && room == 9){tft.Popup(F(" ""Don't you hate waiting for recyclers?"" "),1,45,25);return true;}
+   else if((tft.solid[i].spritecol == fremenfelderblondere1) && room == 9){tft.Popup(F(" ""I'm alomost done with this load."" "),1,60,25);return true;}
+   else if((tft.solid[i].spritecol == fremenfbrownf1) && room == 9){tft.Popup(F(" ""I just started my first load. I'm sure"" "),1,40,20); tft.Popup3(F(" ""there's an open machine here."" "),1,70,35);return true;}
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -532,6 +544,18 @@ bool checkcolision(void) // Transformed it into a function
    else if((tft.solid[i].spritecol == stepsl1) && room == 11){room = 10; player_x = 254; player_y = 188; cameraX = -160; cameraY = -224; cameraXMin = -160; cameraYMin = -224;}
    else if((tft.solid[i].spritecol == stairsr1) && room ==11){room = 12; player_x = 254; player_y = 112; cameraX = -160; cameraY = -0; cameraXMin = -160; cameraYMin = -224;}    
    else if((tft.solid[i].spritecol == stepsl1) && room == 12){room = 11; player_x = 242; player_y = 186; cameraX = -160; cameraY = -224; cameraXMin = -160; cameraYMin = -224;}
+
+   else if((tft.solid[i].spritecol == fremenfbrownr1) && room == 10){tft.Popup(F(" ""Choam has the monopoly on all goods"" "),1,50,20); tft.Popup3(F(" ""sold through out the universe."" "),1,70,35);return true;}
+   else if((tft.solid[i].spritecol == fremenfblondere1) && room == 10){tft.Popup(F(" ""I can't find the correct directory. "" "),1,50,25); return true;}
+   else if((tft.solid[i].spritecol == fremenblackre1) && room == 10){tft.Popup(F(" ""This data hub is not working properly."" "),1,42,25); return true;}
+   else if((tft.solid[i].spritecol == fremenbrownre1) && room == 10){tft.Popup(F(" ""Free snacks are just one of the small "" "),1,45,20); tft.Popup3(F(" ""things choam does for its customers."" "),1,45,35);return true;}
+   else if((tft.solid[i].spritecol == register1) && room == 10){tft.Popup(F(" ""Welcome to the Choam Embassy on Arrakis."" "),1,37,20); tft.Popup3(F(" ""Do you have an appointment?"" "),1,80,35);return true;}
+   else if((tft.solid[i].spritecol == fremenfredre1) && room == 10){tft.Popup(F(" ""Hi. I'm trying to get an appointment "" "),1,50,20); tft.Popup3(F(" ""for a patent on a spice solidifier."" "),1,50,35);return true;}
+   else if((tft.solid[i].spritecol == fremenblackr1) && room == 10){tft.Popup(F(" ""I've been waiting for hours!"" "),1,70,25); return true;}
+   else if((tft.solid[i].spritecol == fremenblackl2) && room == 10){tft.Popup(F(" ""Even the Ixians have to register"" "),1,60,20); tft.Popup3(F(" ""with choam."" "),1,110,35);return true;}
+   
+   else if((tft.solid[i].spritecol == fremenredr1) && room == 11){tft.Popup(F(" ""Choam has the monopoly on all goods"" "),1,50,20); tft.Popup3(F(" ""sold through out the universe."" "),1,90,35);return true;}
+   
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////// arrakeen room 5 palace levels 1 and 2 and 3 with basement 1 and 2

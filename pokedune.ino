@@ -6,10 +6,19 @@
 #include <SPIN.h>
 #include <SPI.h>
 #include <Bounce.h>
-//#include "Battle.h"
+#include "Variables.h"
 #include "Player.h"
 #include "World.h"
 #include "Monsters.h"
+#include "Menu.h"
+
+
+#define STATE_Player 0
+#define STATE_Menu 1
+#define STATE_Transition 3
+
+byte state = STATE_Player;
+byte nextState = STATE_Menu;
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 #define TFT_DC  9
@@ -60,10 +69,21 @@ void setup() {
 ///////////////////////////////////////////////////////////////////////////////
 void loop(void) {
 
+if(state == STATE_Player){
 drawplayer();
-Menu();
-///drawbattle(player_x, player_y);
-  tft.updateScreen();
- 
+   state = STATE_Player;
+        nextState = STATE_Transition;
+}
+else if(state == STATE_Menu){
+ Menu();
+     state = STATE_Menu;
+         nextState = STATE_Transition;
 }
 
+else if(state == STATE_Transition){
+    state = nextState;
+  }
+ 
+  tft.updateScreen();
+ 
+   }
