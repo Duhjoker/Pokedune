@@ -6,6 +6,7 @@
 #include <SPIN.h>
 #include <SPI.h>
 #include <Bounce.h>
+#include <EEPROM.h>
 #include "Variables.h"
 #include "Player.h"
 #include "World.h"
@@ -56,7 +57,7 @@ void setup() {
    pinMode(buttonS, INPUT_PULLUP);
    pinMode(buttonX, INPUT_PULLUP);
    pinMode(buttonY, INPUT_PULLUP);
-   pinMode(buttonA, INPUT_PULLUP);
+   pinMode(buttonA, INPUT);
    pinMode(buttonB, INPUT_PULLUP);
    pinMode(buttonT, INPUT_PULLUP); 
    SPI.setMISO(39);
@@ -70,19 +71,23 @@ void setup() {
 void loop(void) {
 
 if(state == STATE_Menu){
+ if (ButtonA.fallingEdge()){  
 Menu();
-controls();
+tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot2,palette);
+controls();}
    state = STATE_Menu;
         nextState = STATE_Player;
 }
 else if(state == STATE_Player){
  drawplayer();
+ tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwa,palette);
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwb,palette);
  controls();
      state = STATE_Player;
-//      nextState = STATE_Menu;   
+      nextState = STATE_Menu;   
  }
 
-if(nextState != state) state = nextState;
+ if(nextState != state) state = nextState;
   
 
   tft.updateScreen();
@@ -142,96 +147,96 @@ if(state == STATE_Player){
 ////////////////////////////Up/////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 if (ButtonUp.fallingEdge()){
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulrearwa,palette);
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulrearwb,palette);
-    player_direction = 1;
-    player_y -= 4;
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulrearwa,palette);
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulrearwb,palette);
+    player.player_direction = 1;
+    player.player_y -= 4;
     if(checkcolision())
     {
-        player_y += 4;} 
+        player.player_y += 4;} 
     }
-     if(player_y <= 16){
-        player_y = 16;}  
+     if(player.player_y <= 16){
+        player.player_y = 16;}  
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////Down///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 if (ButtonDown.fallingEdge()){
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulfrontwa,palette);
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulfrontwb,palette);
-    player_direction = 2;
-    player_y += 4;
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwa,palette);
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwb,palette);
+    player.player_direction = 2;
+    player.player_y += 4;
     if(checkcolision())
     {
-       player_y -=4;}
+       player.player_y -=4;}
     }
-    if(player_y >= 224){
-       player_y = 224;}
+    if(player.player_y >= 224){
+       player.player_y = 224;}
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////Left////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 if (ButtonLeft.fallingEdge()){
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulleftw,palette);
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulleft,palette);
-    player_direction = 3;
-    player_x -= 4;
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulleftw,palette);
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulleft,palette);
+    player.player_direction = 3;
+    player.player_x -= 4;
     if(checkcolision())
    {
-      player_x += 4;}  
+      player.player_x += 4;}  
    }
-   if(player_x >= 304){
-      player_x = 304;}    
+   if(player.player_x >= 304){
+      player.player_x = 304;}    
 /////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Right////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 if (ButtonRight.fallingEdge()){
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulrightw,palette);
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulright,palette);
-    player_direction = 4;
-    player_x += 4;
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulrightw,palette);
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulright,palette);
+    player.player_direction = 4;
+    player.player_x += 4;
   if(checkcolision())
   {
-    player_x -= 4;}
+    player.player_x -= 4;}
   }
-            if(player_x <= 16){
-              player_x = 16;}
+            if(player.player_x <= 16){
+              player.player_x = 16;}
 ///////////////////////////////////////////////////////////////////////////////     
 //////////////////////////////PLAYER DIRECTION/////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-if (player_direction == 1){
-  tft.writeRectNBPP(player_x, player_y,16,16,4,paulrear,palette);
+if (player.player_direction == 1){
+  tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulrear,palette);
 }
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-else if (player_direction == 2){
-   tft.writeRectNBPP(player_x, player_y,16,16,4,paulfront,palette);
+else if (player.player_direction == 2){
+   tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfront,palette);
 }
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-else if (player_direction == 3){
-    tft.writeRectNBPP(player_x, player_y,16,16,4,paulleft,palette);
+else if (player.player_direction == 3){
+    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulleft,palette);
 }
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-else if (player_direction == 4){
-     tft.writeRectNBPP(player_x, player_y,16,16,4,paulright,palette);
+else if (player.player_direction == 4){
+     tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulright,palette);
 }
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////        
 /////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////for use with movey blocks////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-else if (player_direction == 5){
-     tft.writeRectNBPP(player_x, player_y,16,16,4,paulrearwa,palette);
+else if (player.player_direction == 5){
+     tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulrearwa,palette);
 }     
-else if (player_direction == 6){
-     tft.writeRectNBPP(player_x, player_y,16,16,4,paulfrontwa,palette);
+else if (player.player_direction == 6){
+     tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwa,palette);
 }     
-else if (player_direction == 7){
-     tft.writeRectNBPP(player_x, player_y,16,16,4,paulleftw,palette);
+else if (player.player_direction == 7){
+     tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulleftw,palette);
 }          
-else if (player_direction == 8){
-     tft.writeRectNBPP(player_x, player_y,16,16,4,paulrightw,palette); 
+else if (player.player_direction == 8){
+     tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulrightw,palette); 
      }          
  }
 ///////////////////////////////////////////////////////////////////////////////
@@ -240,10 +245,10 @@ else if(state == STATE_Menu){
 
 if (ButtonUp.fallingEdge()){
      tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot2,palette);
-     cursor_y -= 16;
+     cursor_y -= 40;
 //     if(checkcolision())
      {
-      cursor_y += 16;} 
+      cursor_y += 40;} 
      }
      if(cursor_y <= 32){
         cursor_y = 32;}
@@ -253,16 +258,41 @@ if (ButtonUp.fallingEdge()){
 //////////////////////////////////////////////////////////////////////////////
  if (ButtonDown.fallingEdge()){
    tft.writeRectNBPP(cursor_x, cursor_y,16,16,4,cursordot2,palette);
-   cursor_y += 16;
+   cursor_y += 40;
 //    if(checkcolision())
     {
-    cursor_y -= 16;}
+    cursor_y -= 40;}
     }
     if(cursor_y >= 224){
        cursor_y = 224;}
    }
  }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////PROGRESS//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//------------------------
+byte saveKey = 121;
+
+void save()
+{
+  EEPROM.put(0, saveKey);
+  EEPROM.put(1, player);
+}
+
+bool checkLoad()
+{
+  byte nr;
+  EEPROM.get(0, nr);
+  
+  return (nr == saveKey);
+}
+
+void load()
+{
+    EEPROM.get(1, player);
+}
 
 
 

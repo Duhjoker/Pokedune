@@ -3,11 +3,11 @@
 
 #include "Variables.h"
 #include "Player.h"
-#include "Controls.h"
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int cursor_x = 17;       //cursor position on screen x
-int cursor_y = 48;     //cursor position on screen y
+int cursor_y = 20;     //cursor position on screen y
 
 bool menuIsVisible = false;
 bool menuIsSpecific = false;
@@ -102,7 +102,15 @@ uint8_t getFirstAvailSlot() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Menu(){
-if (ButtonA.fallingEdge()){
+
+Rect rectA {0,0,136,20};
+Rect rectB {0,20,136,40};
+Rect rectC {0,60,136,40};
+Rect rectD {0,100,136,40};
+Rect rectE {0,140,136,40};
+Rect rectF {0,180,136,40};
+Rect rectG {0,220,136,20};
+Rect rectH {cursor_x,cursor_y,16,16};
 
  tft.writeRectNBPP(0,0,136,20,4,menul1,palette);
   tft.writeRectNBPP(0,20,136,40,4,menul2,palette);
@@ -125,8 +133,31 @@ if (ButtonA.fallingEdge()){
    tft.writeRectNBPP(136,186,184,16,4,menur2,palette);
   tft.writeRectNBPP(136,202,184,16,4,menur2,palette);
  tft.writeRectNBPP(136,218,184,22,4,menur3,palette);
-  }
- }
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+     if ((ButtonB.fallingEdge() && tft.collideRectRect( rectB.x, rectB.y, rectB.width, rectB.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+{
+// do some thing 
+}
+else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectC.x, rectC.y, rectC.width, rectC.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+{
+// do some thing 
+} 
+else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectD.x, rectD.y, rectD.width, rectD.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+{
+// do some thing 
+}
+else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectE.x, rectE.y, rectE.width, rectE.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+{
+// do some thing 
+}
+else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectF.x, rectF.y, rectF.width, rectF.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+{
+// do some thing 
+   }
+}
+
  
 #endif
 
