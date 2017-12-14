@@ -94,7 +94,9 @@ else if(player.player_y > playerYMax)
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////Tilemap/////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-/////// top center rock formation
+  tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwa,palette);
+  tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwb,palette);
+
         
         if(room == 1){
   tft.drawTilemap(cameraX, cameraY, imperialbasin, spritesheet, palette);}

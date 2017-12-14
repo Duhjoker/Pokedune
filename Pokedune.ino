@@ -73,15 +73,12 @@ void loop(void) {
 if(state == STATE_Menu){
  if (ButtonA.fallingEdge()){  
 Menu();
-tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot2,palette);
 controls();}
    state = STATE_Menu;
         nextState = STATE_Player;
 }
 else if(state == STATE_Player){
  drawplayer();
- tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwa,palette);
-    tft.writeRectNBPP(player.player_x, player.player_y,16,16,4,paulfrontwb,palette);
  controls();
      state = STATE_Player;
       nextState = STATE_Menu;   
