@@ -5,22 +5,30 @@ extern GrafxT3 tft;
 
 struct Player
 {
-  int player_x; int player_y; 
+  int player_x; 
+  int player_y; 
   int room;
   int player_direction; 
 };
 
 Player player;
 
+const uint16_t Player[] = { 
+  160, // position x
+  170, // position y
+    3, // currentMap
+    2, // direction
+};
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////////player camera
 ///player
-int player_x = 160;     //player position on screen x
-int player_y = 170;     //player position on screen y
-int player_direction = 2;
+//int player_x = 160;     //player position on screen x
+//int player_y = 170;     //player position on screen y
+//int player_direction = 2;
 //////room
-int room = 3;   ///////starting room 
+//int room = 3;   ///////starting room 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Camera offset

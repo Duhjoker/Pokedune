@@ -79,6 +79,7 @@ controls();}
 }
 else if(state == STATE_Player){
  drawplayer();
+ player.room = 3;
  controls();
      state = STATE_Player;
       nextState = STATE_Menu;   
@@ -247,8 +248,8 @@ if (ButtonUp.fallingEdge()){
      {
       cursor_y += 40;} 
      }
-     if(cursor_y <= 32){
-        cursor_y = 32;}
+     if(cursor_y <= 20){
+        cursor_y = 20;}
           
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////Down///////////////////////////////////////////
@@ -260,8 +261,8 @@ if (ButtonUp.fallingEdge()){
     {
     cursor_y -= 40;}
     }
-    if(cursor_y >= 224){
-       cursor_y = 224;}
+    if(cursor_y >= 220){
+       cursor_y = 220;}
    }
  }
 
