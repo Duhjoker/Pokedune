@@ -1,8 +1,8 @@
 #ifndef _Battle_H_
 #define _Battle_H_
 
-//#include "Player.h"
-//#include "Variables.h"
+#include "Player.h"
+#include "Variables.h"
 //#include "Monsters.h"
 //int count = 0;
 //int16_t x;
@@ -15,8 +15,8 @@
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-
-/* void drawbattle(int16_t player_x, int16_t player_y) {
+/*
+ void drawbattle(uint16_t player_x, uint16_t player_y) {
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////Palette////////////////////////////////////////
@@ -43,8 +43,8 @@
 //////////////////////////////////////////////////////////////////////////////
  if(count == 0)
 {
-x = random(0,320);
-y = random(0,240);
+x = random(10,30); //sets the horizontal axis trigger from ten to thirty steps
+y = random(10,30); //sets the vertical axis trigger from ten to thirty steps
 count = 1;
 }
 
@@ -87,12 +87,12 @@ if(tft.collideRectRect( rectA.x, rectA.y, rectA.width, rectA.height, rectB.x, re
   tft.setTextColor(WHITE); 
   tft.setTextSize(2);
   tft.println("Flee");
-  tft.writeRectNBPP(0,130,26,26,4,palette);
+  tft.writeRectNBPP(0,130,26,26,4,cursordot1,palette);
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Up/////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
  if (ButtonUp.fallingEdge()){
-     tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot,palette);
+     tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot1,palette);
      cursor_y -= 26;
      if(checkcolision())
      {
@@ -105,7 +105,7 @@ if(tft.collideRectRect( rectA.x, rectA.y, rectA.width, rectA.height, rectB.x, re
 ///////////////////////////////Down///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
  if (ButtonDown.fallingEdge()){
-   tft.writeRectNBPP(cursor_x, cursor_y,16,16,4,cursordot,palette);
+   tft.writeRectNBPP(cursor_x, cursor_y,16,16,4,cursordot1,palette);
    cursor_y += 26;
     if(checkcolision())
     {
@@ -115,28 +115,28 @@ if(tft.collideRectRect( rectA.x, rectA.y, rectA.width, rectA.height, rectB.x, re
        player_y = 240;}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if (player_direction == 1){
-  tft.writeRectNBPP(cursor_x, cursor_y,26,26,4,cursordot,palette);
+if (player.player_direction == 1){
+  tft.writeRectNBPP(cursor_x, cursor_y,26,26,4,cursordot1,palette);
 }
        
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      if ((ButtonA.fallingEdge() && tft.collideRectRect( rectC.x, rectC.y, rectC.width, rectC.height, rectG.x, rectG.y, rectG.width, rectG.height))
+      if ((ButtonA.fallingEdge() && tft.collideRectRect( rectC.x, rectC.y, rectC.width, rectC.height, rectG.x, rectG.y, rectG.width, rectG.height)))
 {
- do some thing 
+ //do some thing 
 }
-else if ((ButtonA.fallingEdge() && tft.collideRectRect( rectD.x, rectD.y, rectD.width, rectD.height, rectG.x, rectG.y, rectG.width, rectG.height))
+else if ((ButtonA.fallingEdge() && tft.collideRectRect( rectD.x, rectD.y, rectD.width, rectD.height, rectG.x, rectG.y, rectG.width, rectG.height)))
 {
- do some thing 
+ //do some thing 
 }
-else if ((ButtonA.fallingEdge() && tft.collideRectRect( rectE.x, rectE.y, rectE.width, rectE.height, rectG.x, rectG.y, rectG.width, rectG.height))
+else if ((ButtonA.fallingEdge() && tft.collideRectRect( rectE.x, rectE.y, rectE.width, rectE.height, rectG.x, rectG.y, rectG.width, rectG.height)))
 {
- do some thing 
+ //do some thing 
 } 
-else if ((ButtonA.fallingEdge() && tft.collideRectRect( rectF.x, rectF.y, rectF.width, rectF.height, rectG.x, rectG.y, rectG.width, rectG.height))
+else if ((ButtonA.fallingEdge() && tft.collideRectRect( rectF.x, rectF.y, rectF.width, rectF.height, rectG.x, rectG.y, rectG.width, rectG.height)))
 {
- do some thing 
+ //do some thing 
 }
   
           }

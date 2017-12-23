@@ -3,12 +3,19 @@
 
 #include "Variables.h"
 #include "Player.h"
+#include "World.h"
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int cursor_x = 17;       //cursor position on screen x
-int cursor_y = 31;     //cursor position on screen y
 
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+struct CursorA
+{
+  int cursorA_x; 
+  int cursorA_y; 
+  int cursor_direction;
+};
+
+ CursorA cursora = { 17, 31, 1};
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +106,30 @@ uint8_t getFirstAvailSlot() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Menu(){
-
+if(tft.Brepeat(BTN_A,1)){
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////Palette////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+ palette[0] = 0;
+       palette[1] = BLACK;
+             palette[2] = BLUE;
+                   palette[3] = BROWN;
+                         palette[4] = DARKGREEN;
+                              palette[5] = GREY;
+                                    palette[6] = PINK;
+                                          palette[7] = RED;
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////                                                
+                                           palette[8] = BEIGE;
+                                     palette[9] = GREEN;
+                               palette[a]= DARKGREY;
+                         palette[b] = LIGHTGREY;
+                   palette[c] = YELLOW; 
+             palette[d] = PURPLE; 
+       palette[e] = WHITE;
+ palette[f] = ORANGE;
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 Rect rectA {0,0,136,20};
 Rect rectB {0,20,136,40};
 Rect rectC {0,60,136,40};
@@ -107,9 +137,9 @@ Rect rectD {0,100,136,40};
 Rect rectE {0,140,136,40};
 Rect rectF {0,180,136,40};
 Rect rectG {0,220,136,20};
-Rect rectH {cursor_x,cursor_y,16,16};
+Rect rectH {cursora.cursorA_x,cursora.cursorA_y,16,16};
 
-tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot2,palette);
+//tft.writeRectNBPP(cursora.cursorA_x,cursora.cursorA_y,16,16,4,cursordot2,palette);
 
  tft.writeRectNBPP(0,0,136,20,4,menul1,palette);
   tft.writeRectNBPP(0,20,136,40,4,menul2,palette);
@@ -132,31 +162,63 @@ tft.writeRectNBPP(cursor_x,cursor_y,16,16,4,cursordot2,palette);
    tft.writeRectNBPP(136,186,184,16,4,menur2,palette);
   tft.writeRectNBPP(136,202,184,16,4,menur2,palette);
  tft.writeRectNBPP(136,218,184,22,4,menur3,palette);
- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-     if ((ButtonB.fallingEdge() && tft.collideRectRect( rectB.x, rectB.y, rectB.width, rectB.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ if(tft.Bpressed(BTN_UP)){
+     tft.writeRectNBPP(cursora.cursorA_x,cursora.cursorA_y,16,16,4,cursordot2,palette);
+     cursora.cursor_direction = 1;
+     cursora.cursorA_y -= 40;
+   } 
+     if(cursora.cursorA_y <= 30){
+        cursora.cursorA_y = 30;}  
+              
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////Down///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+ if(tft.Bpressed(BTN_DOWN)){
+   tft.writeRectNBPP(cursora.cursorA_x, cursora.cursorA_y,16,16,4,cursordot2,palette);
+   cursora.cursor_direction = 1;
+   cursora.cursorA_y += 40;
+ }
+    if(cursora.cursorA_y >= 192){
+       cursora.cursorA_y = 192;}
+         
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (player.player_direction == 1){
+  tft.writeRectNBPP(cursora.cursorA_x, cursora.cursorA_y,16,16,4,cursordot2,palette);
+   } 
+ }
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+     if((tft.Bpressed(BTN_B) && tft.collideRectRect( rectB.x, rectB.y, rectB.width, rectB.height, rectH.x, rectH.y, rectH.width, rectH.height)))
 {
 // do some thing 
 }
-else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectC.x, rectC.y, rectC.width, rectC.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+else if((tft.Bpressed(BTN_B) && tft.collideRectRect( rectC.x, rectC.y, rectC.width, rectC.height, rectH.x, rectH.y, rectH.width, rectH.height)))
 {
 // do some thing 
 } 
-else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectD.x, rectD.y, rectD.width, rectD.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+else if((tft.Bpressed(BTN_B) && tft.collideRectRect( rectD.x, rectD.y, rectD.width, rectD.height, rectH.x, rectH.y, rectH.width, rectH.height)))
 {
 // do some thing 
 }
-else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectE.x, rectE.y, rectE.width, rectE.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+else if((tft.Bpressed(BTN_B) && tft.collideRectRect( rectE.x, rectE.y, rectE.width, rectE.height, rectH.x, rectH.y, rectH.width, rectH.height)))
 {
 // do some thing 
 }
-else if ((ButtonB.fallingEdge() && tft.collideRectRect( rectF.x, rectF.y, rectF.width, rectF.height, rectH.x, rectH.y, rectH.width, rectH.height)))
+else if((tft.Bpressed(BTN_B) && tft.collideRectRect( rectF.x, rectF.y, rectF.width, rectF.height, rectH.x, rectH.y, rectH.width, rectH.height)))
 {
 // do some thing 
    }
+   if (player.player_direction == 1){
+  tft.writeRectNBPP(cursora.cursorA_x, cursora.cursorA_y,16,16,4,cursordot2,palette);
 }
-
+}
+*/
+ 
  
 #endif
 
