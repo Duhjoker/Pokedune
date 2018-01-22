@@ -5,7 +5,7 @@
 #include <GrafxT3.h>
 #include <SPIN.h>
 #include <SPI.h>
-#include <Bounce.h>
+//#include <Bounce.h>
 #include <EEPROM.h>
 #include "Variables.h"
 #include "Player.h"
@@ -13,7 +13,6 @@
 #include "Monsters.h"
 #include "Battle.h"
 #include "Menu.h"
-#include "Controls.h"
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -57,26 +56,32 @@ void setup() {
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////Loop////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-void loop(void) {
+void loop() {
    tft.updateAll();
-   if(state == STATE_Menu){
-    Menu(); 
-             state = STATE_Menu;
-             nextState = STATE_Player; 
-    }
-else if(state == STATE_Player){ 
- drawplayer();
-              state = STATE_Player;
-              nextState = STATE_Menu;   
-    }
-//else if(state == STATE_Battle){ 
-// drawbattle(player.player_x,player.player_y);
- 
-//              state = STATE_Battle;
-//              nextState = STATE_Menu;
-//    }
-if(nextState != state) state = nextState;
-   tft.updateScreen();
+   
+  switch (state) {
+
+    case STATE_Title:
+
+      titlepage();
+      if (tft.Brepeat(BTN_S,1)) {
+        state = STATE_Player;
+
+       }
+      break;
+  
+    case STATE_Player:
+      drawplayer();
+      break;
+
+    case STATE_Menu:
+      Menu();
+      break;
+
+  }
+
+  tft.updateScreen();
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,21 +109,17 @@ void load()
     EEPROM.get(1, player);
 }
 
-//------------------------
-// INPUT
-//------------------------
-bool getButtonDown(byte button)
-{
-  if(tft.Bpressed(button))
-  {
-    if(buttons & button) return false;
-    else buttons |= button;
-    return true;
-  }
-  else
-  {
-    if(buttons & button) buttons ^= button;
-    return false;
-  }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void titlepage(){
+palette[0] = 0; palette[1] = BLACK;  palette[2] = BLUE; palette[3] = BROWN; palette[4] = DARKGREEN; palette[5] = GREY;
+palette[6] = PINK; palette[7] = RED; palette[8] = BEIGE; palette[9] = GREEN; palette[a]= DARKGREY; palette[b] = LIGHTGREY;
+palette[c] = YELLOW; palette[d] = PURPLE; palette[e] = WHITE; palette[f] = ORANGE;
+  tft.writeRectNBPP(0,0,320,240,4, title_1, palette);
+  
 }
+
+
 
